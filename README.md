@@ -4,12 +4,6 @@ This project is a **decentralized donation tracker** that allows users to donate
 
 ---
 
-## 🔗 Live Demo
-
-[Check out the live demo here!](#) (Add your demo link here)
-
----
-
 ## 📜 Features
 
 - **Donation Tracking**: Users can donate in ETH to selected charity causes.
