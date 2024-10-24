@@ -1,7 +1,3 @@
-### README for Crypto Donation Tracker
-
----
-
 # 🌍 Decentralized Crypto Donation Tracker
 
 This project is a **decentralized donation tracker** that allows users to donate cryptocurrency to various causes and track all donations in real time. The goal is to create a transparent and easy-to-use platform where users can support charitable initiatives using cryptocurrencies like **ETH**. Every donation is logged and displayed for transparency, simulating blockchain-like behavior.
