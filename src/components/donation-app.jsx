@@ -49,16 +49,31 @@ export function DonationAppJsx() {
   // };
 
   async function handleConnect() {
+    if (window.ethereum){
+        alert("eth found");
+    }
+    else{
+      alert("eth not found");
+    }
     try {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        console.log('Connected account:', accounts[0]);
-        setAddress(accounts[0]);
-        setConnected(true);
-        alert("done");
-        return accounts[0];
+        // const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        // console.log('Connected account:', accounts[0]);
+        // setAddress(accounts[0]);
+        // setConnected(true);
+        // alert("done");
+        // return accounts[0];
+
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        // Create an ethers provider with MetaMask
+        const provider = new ethers.BrowserProvider(window.ethereum);
+  
+        // Get the user's account
+        const accounts = await provider.listAccounts();
+        alert(accounts[0]);
     } catch (error) {
         console.error('Failed to connect wallet:', error);
-        alert("error", error)
+        alert('Failed to connect wallet:', errors);
     }
 }
 
