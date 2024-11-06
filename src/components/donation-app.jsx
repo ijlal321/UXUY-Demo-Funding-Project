@@ -15,13 +15,6 @@ const people = [
 ];
 
 
-// Mock function to simulate donation
-const donate = (amount, recipient) => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(true), 1500);
-  });
-};
-
 export function DonationAppJsx() {
   const [connected, setConnected] = useState(false);
   const [address, setAddress] = useState("");
@@ -56,6 +49,7 @@ export function DonationAppJsx() {
       console.log('Connected account:', accounts[0]);
       setAddress(accounts[0]);
       setConnected(true);
+      await switchNetworkToBNBTestnet(ethereum);
       return accounts[0];
     } catch (error) {
       console.error('Failed to connect wallet:', error);
@@ -67,6 +61,42 @@ export function DonationAppJsx() {
     setSelectedPerson(person);
     setDonationStatus(null);
     setDonationAmount("");
+  };
+
+  const switchNetworkToBNBTestnet = async (ethereum) => {
+    const bnbTestnetChainId = '0x61'; // BNB Testnet chain ID
+    try {
+      // Switch network to Binance Smart Chain Testnet
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: bnbTestnetChainId }],
+      });
+      console.log('Switched to BNB Testnet');
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        // The network is not available, request the user to add it
+        try {
+          await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: bnbTestnetChainId,
+                chainName: 'Binance Smart Chain Testnet',
+                rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+                blockExplorerUrls: ['https://testnet.bscscan.com'],
+                nativeCurrency: {
+                  name: 'Binance Coin',
+                  symbol: 'BNB',
+                  decimals: 18,
+                },
+              },
+            ],
+          });
+        } catch (addError) {
+          console.error('Error adding network:', addError);
+        }
+      }
+    }
   };
 
   const handleDonate = async () => {
@@ -114,7 +144,7 @@ export function DonationAppJsx() {
       ) : (
         <p className="text-center text-sm text-muted-foreground mb-4">Connected: {address}</p>
       )}
-      (Only Send on BNB Testnet)
+      This is a demoProject, any donation send would be send to sender Again. The written addresses are for demo only.
       {!selectedPerson ? (
         <div className="space-y-4">
           {people.map((person) => (
