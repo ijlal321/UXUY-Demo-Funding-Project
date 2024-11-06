@@ -54,9 +54,11 @@ export function DonationAppJsx() {
         console.log('Connected account:', accounts[0]);
         setAddress(accounts[0]);
         setConnected(true);
+        alert("done");
         return accounts[0];
     } catch (error) {
         console.error('Failed to connect wallet:', error);
+        alert("error", error)
     }
 }
 
