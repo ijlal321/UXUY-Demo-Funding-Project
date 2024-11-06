@@ -28,7 +28,7 @@ export function DonationAppJsx() {
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
   const [donationStatus, setDonationStatus] = useState(null);
-  const [ethereum, setEthereum] = useState(null);
+  const [Ethereum, setEthereum] = useState(null);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -82,16 +82,16 @@ export function DonationAppJsx() {
 
     try {
 
-      const accounts = await ethereum.request({ method: 'eth_accounts' });
+      const accounts = await Ethereum.request({ method: 'eth_accounts' });
       const transactionParameters = {
         to: accounts[0],
         from: accounts[0],
-        value: value, // Value in wei
+        value: donationAmount, // Value in wei
         // gasPrice: '0x09184e72a000', // Customize as needed
         // gas: '0x5208', // 21000 gas limit
       };
 
-      const txHash = await ethereum.request({
+      const txHash = await Ethereum.request({
         method: 'eth_sendTransaction',
         params: [transactionParameters],
       });
@@ -100,7 +100,7 @@ export function DonationAppJsx() {
       // await donate(parseFloat(donationAmount), selectedPerson.name);
       setDonationStatus('success');
     } catch (error) {
-      setDonationStatus('error');
+      setDonationStatus('error:', error);
     }
   };
 
