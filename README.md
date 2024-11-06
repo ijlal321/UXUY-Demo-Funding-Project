@@ -29,8 +29,8 @@
 
 The **UXUY Funding App** is a Telegram-based donation platform built on BNB Chain that allows users to donate to their favorite Telegram admins or any other Telegram user with just one click. The app integrates seamlessly with the **UXUY Wallet** and leverages the BNB Testnet for transactions, providing a smooth and efficient donation experience.
 
-See Project Demo Here:
-
+#### See Project Demo Here:
+[![Video Title](https://play-lh.googleusercontent.com/-NfB32T_VpP4p43-flpEF-Iw_RqiX8ofcpXggqtYdFPYSKMGQ-_6VbUSyhyqFqQbxQ=w526-h296-rw)](https://youtube.com/shorts/LTJADhm8XLk)
 
 ### **Key Features:**
 - **1-Click Donation:** Users can easily select a favorite Telegram user and make a donation instantly.
@@ -110,10 +110,7 @@ The **UXUY Funding App** is still in the early stages of development. Future upd
 
 ## **Contact Information**
 
-- **Email:** brand@uxuy.com
-- **Telegram:** @sharpnack
-- **Telegram Group:** @uxuyconnect
-- **Twitter:** [@UXUYcom](https://x.com/uxuycom)
+- **Email:** ijlal.tanveer294@gmail.com
 
 ---
 
