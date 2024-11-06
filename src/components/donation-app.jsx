@@ -40,6 +40,8 @@ export function DonationAppJsx() {
       window.Telegram.WebApp.ready();
       window.Telegram.WebApp.MainButton.setText('DONATE').show().onClick(handleDonate);
     }
+
+
   }, []);
 
   // const handleConnect = async () => {
@@ -49,33 +51,28 @@ export function DonationAppJsx() {
   // };
 
   async function handleConnect() {
-    if (window.ethereum){
-        alert("eth found");
-    }
-    else{
-      alert("eth not found");
-    }
     try {
-        // const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        // console.log('Connected account:', accounts[0]);
-        // setAddress(accounts[0]);
-        // setConnected(true);
-        // alert("done");
-        // return accounts[0];
 
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const { ethereum }  = new WalletTgSdk({
+        injected: true,  // default: false,   If `window.ethereum` does not exist, inject window.ethereum
+        metaData: {
+          name: 'UXUY Wallet', // if you want to use a custom name
+          icon: 'https://uxuy.com/logo.png', // if you want to use a custom icon
+        }
+      })
 
-        // Create an ethers provider with MetaMask
-        const provider = new ethers.BrowserProvider(window.ethereum);
-  
-        // Get the user's account
-        const accounts = await provider.listAccounts();
-        alert(accounts[0]);
+
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      console.log('Connected account:', accounts[0]);
+      setAddress(accounts[0]);
+      setConnected(true);
+      alert("done");
+      return accounts[0];
     } catch (error) {
-        console.error('Failed to connect wallet:', error);
-        alert('Failed to connect wallet:', errors);
+      console.error('Failed to connect wallet:', error);
+      alert('Failed to connect wallet:', errors);
     }
-}
+  }
 
   const handleSelectPerson = (person) => {
     setSelectedPerson(person);
