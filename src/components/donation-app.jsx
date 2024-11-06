@@ -27,7 +27,7 @@ export function DonationAppJsx() {
   const [address, setAddress] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
-  const [donationStatus, setDonationStatus] = useState(null);
+  const [ethereum, setEthereum] = useState(null);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -48,6 +48,7 @@ export function DonationAppJsx() {
           icon: 'https://uxuy.com/logo.png', // if you want to use a custom icon
         }
       })
+      setEthereum(ethereum);
 
 
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
