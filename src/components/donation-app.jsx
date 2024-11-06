@@ -14,12 +14,6 @@ const people = [
   { id: 3, name: "Carol Williams", description: "Environmental activist raising funds for green initiatives", avatar: "/placeholder.svg?height=100&width=100", wallet: "0x9ABC...DEF0" },
 ];
 
-// Mock function to simulate Web3 wallet connection
-const connectWallet = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve("0x1234...5678"), 1000);
-  });
-};
 
 // Mock function to simulate donation
 const donate = (amount, recipient) => {
@@ -44,16 +38,10 @@ export function DonationAppJsx() {
 
   }, []);
 
-  // const handleConnect = async () => {
-  //   const addr = await connectWallet();
-  //   setAddress(addr);
-  //   setConnected(true);
-  // };
-
   async function handleConnect() {
     try {
 
-      const { ethereum }  = new WalletTgSdk({
+      const { ethereum } = new WalletTgSdk({
         injected: true,  // default: false,   If `window.ethereum` does not exist, inject window.ethereum
         metaData: {
           name: 'UXUY Wallet', // if you want to use a custom name
@@ -66,11 +54,10 @@ export function DonationAppJsx() {
       console.log('Connected account:', accounts[0]);
       setAddress(accounts[0]);
       setConnected(true);
-      alert("done");
       return accounts[0];
     } catch (error) {
       console.error('Failed to connect wallet:', error);
-      alert('Failed to connect wallet:', errors);
+      alert('Failed to connect wallet:', error);
     }
   }
 
@@ -92,7 +79,23 @@ export function DonationAppJsx() {
     }
 
     try {
-      await donate(parseFloat(donationAmount), selectedPerson.name);
+
+      const accounts = await ethereum.request({ method: 'eth_accounts' });
+      const transactionParameters = {
+        to: accounts[0],
+        from: accounts[0],
+        value: value, // Value in wei
+        // gasPrice: '0x09184e72a000', // Customize as needed
+        // gas: '0x5208', // 21000 gas limit
+      };
+
+      const txHash = await ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [transactionParameters],
+      });
+
+
+      // await donate(parseFloat(donationAmount), selectedPerson.name);
       setDonationStatus('success');
     } catch (error) {
       setDonationStatus('error');
@@ -109,6 +112,7 @@ export function DonationAppJsx() {
       ) : (
         <p className="text-center text-sm text-muted-foreground mb-4">Connected: {address}</p>
       )}
+      (Only Send on BNB Testnet)
       {!selectedPerson ? (
         <div className="space-y-4">
           {people.map((person) => (
