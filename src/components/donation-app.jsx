@@ -27,6 +27,7 @@ export function DonationAppJsx() {
   const [address, setAddress] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
+  const [donationStatus, setDonationStatus] = useState(null);
   const [ethereum, setEthereum] = useState(null);
 
   useEffect(() => {
